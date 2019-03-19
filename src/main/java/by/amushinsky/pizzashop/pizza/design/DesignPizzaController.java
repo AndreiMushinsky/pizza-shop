@@ -3,10 +3,12 @@ package by.amushinsky.pizzashop.pizza.design;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,7 +41,11 @@ public class DesignPizzaController {
 
 
   @PostMapping
-  public String processDesign(Pizza pizza) {
+  public String processDesign(@Valid Pizza pizza, Errors errors) {
+    if (errors.hasErrors()) {
+      return "redirect:/design";
+    }
+
     // TODO: save it to database
     log.info("Processing pizza: " + pizza);
     return "redirect:/orders/current";
