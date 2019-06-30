@@ -63,5 +63,7 @@ public class DesignPizzaController {
     order.addPizza(saved);
     return "redirect:/orders/current";
   }
+  
+  private String shоwDеsignFоrm(Model model) { return ""; }
 
 }
